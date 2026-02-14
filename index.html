@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Neon Space Defender</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="game-container">
+        <canvas id="gameCanvas"></canvas>
+        
+        <!-- UI Overlay -->
+        <div id="ui-layer">
+            <div id="start-screen" class="screen active">
+                <h1 class="neon-title">NEON SPACE DEFENDER</h1>
+                <p class="subtitle">宇宙から迫るネオンの波を防げ！</p>
+                <div class="controls-info">
+                    <p>🎮 <strong>操作方法</strong></p>
+                    <p>⬅️➡️ または A/D: 移動</p>
+                    <p>SPACE または 射撃ボタン: 射撃</p>
+                    <p>🎯 敵を倒してスコアを稼ごう！</p>
+                </div>
+                <button id="start-btn" class="neon-btn">GAME START</button>
+            </div>
+
+            <div id="game-ui" class="screen hidden">
+                <div class="hud">
+                    <div class="score-container">
+                        <span class="label">SCORE</span>
+                        <span id="score-display" class="score">0</span>
+                    </div>
+                    <div class="level-container">
+                        <span class="label">LEVEL</span>
+                        <span id="level-display" class="level">1</span>
+                    </div>
+                    <div class="health-container">
+                        <span class="label">HP</span>
+                        <div class="health-bar">
+                            <div id="health-fill" class="health-fill"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="game-over-screen" class="screen hidden">
+                <h1 class="neon-title game-over">GAME OVER</h1>
+                <div class="final-score">
+                    <p>FINAL SCORE</p>
+                    <span id="final-score-display" class="score">0</span>
+                </div>
+                <div class="high-score">
+                    <p>HIGH SCORE</p>
+                    <span id="high-score-display" class="score">0</span>
+                </div>
+                <button id="restart-btn" class="neon-btn">TRY AGAIN</button>
+            </div>
+
+            <div id="pause-screen" class="screen hidden">
+                <h1 class="neon-title">PAUSED</h1>
+                <button id="resume-btn" class="neon-btn">RESUME</button>
+            </div>
+        </div>
+
+        <!-- Mobile Controls -->
+        <div id="mobile-controls" class="hidden">
+            <div class="control-group">
+                <button id="left-btn" class="control-btn">⬅️</button>
+                <button id="right-btn" class="control-btn">➡️</button>
+            </div>
+            <div class="control-group">
+                <button id="fire-btn" class="control-btn fire">🔥</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
