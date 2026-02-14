@@ -24,14 +24,12 @@ Neon Space Game is a modern space shooter game with a neon color theme. It provi
 
 | Action | Key |
 |--------|-----|
+| Move Up | ⬆️ Arrow Up or W |
+| Move Down | ⬇️ Arrow Down or S |
 | Move Left | ⬅️ Arrow Left or A |
 | Move Right | ➡️ Arrow Right or D |
 | Shoot | SPACE or Fire Button |
 | Pause | ESC |
-
-### Mobile Controls
-
-On touch devices, on-screen control buttons are displayed at the bottom of the screen.
 
 ## 🏆 Scoring System
 
@@ -167,8 +165,8 @@ Synthesized sounds using Web Audio API.
 
 | Screen Size | Adaptation |
 |-------------|------------|
-| 768px and below | Font size adjustment, mobile controls display |
-| 480px and below | Additional font scaling, button size adjustment |
+| 768px and below | Font size adjustment |
+| 480px and below | Additional font scaling |
 
 ## 🎮 Game Configuration
 
@@ -189,5 +187,5 @@ const CONFIG = {
 ---
 
 **Author**: Qwen3-Coder-Next-8bit  
-**Version**: 1.0.0  
+**Version**: 1.1.0  
 **License**: MIT

@@ -369,9 +369,16 @@ class Player {
         if (state.keys['ArrowRight'] || state.keys['d'] || state.touchControls.right) {
             this.x += this.speed;
         }
+        if (state.keys['ArrowUp'] || state.keys['w'] || state.touchControls.up) {
+            this.y -= this.speed;
+        }
+        if (state.keys['ArrowDown'] || state.keys['s'] || state.touchControls.down) {
+            this.y += this.speed;
+        }
 
         // Boundaries
         this.x = Math.max(0, Math.min(canvas.width - this.width, this.x));
+        this.y = Math.max(0, Math.min(canvas.height - this.height, this.y));
 
         // Rapid fire timer
         if (this.rapidFire) {
@@ -423,7 +430,7 @@ class Player {
             // Recoil effect
             this.y += 3;
             setTimeout(() => {
-                this.y = Math.max(canvas.height - 100, this.y - 3);
+                this.y -= 3;
             }, 50);
         }
     }
@@ -777,11 +784,6 @@ function gameLoop() {
         }
     }
 
-    // Auto-fire if touch control is active
-    if (state.touchControls.fire) {
-        player.shoot();
-    }
-
     // Draw combo text
     if (comboCount > 1) {
         drawComboText();
@@ -952,7 +954,6 @@ function endGame() {
     document.getElementById('game-ui').classList.add('hidden');
     document.getElementById('game-over-screen').classList.remove('hidden');
     document.getElementById('game-over-screen').classList.add('active');
-    document.getElementById('mobile-controls').classList.add('hidden');
 }
 
 // Game Functions
@@ -969,11 +970,6 @@ function startGame() {
     
     // Show game UI
     document.getElementById('game-ui').classList.remove('hidden');
-    
-    // Show mobile controls on touch devices
-    if ('ontouchstart' in window || navigator.maxTouchPoints > 0) {
-        document.getElementById('mobile-controls').classList.remove('hidden');
-    }
     
     state.isPlaying = true;
     state.isPaused = false;
@@ -999,7 +995,6 @@ function gameOver() {
     document.getElementById('game-ui').classList.add('hidden');
     document.getElementById('game-over-screen').classList.remove('hidden');
     document.getElementById('game-over-screen').classList.add('active');
-    document.getElementById('mobile-controls').classList.add('hidden');
 }
 
 function togglePause() {
@@ -1033,51 +1028,6 @@ window.addEventListener('keydown', (e) => {
 window.addEventListener('keyup', (e) => {
     state.keys[e.key] = false;
 });
-
-// Touch Controls
-const leftBtn = document.getElementById('left-btn');
-const rightBtn = document.getElementById('right-btn');
-const fireBtn = document.getElementById('fire-btn');
-
-function handleTouchStart(element, control) {
-    element.addEventListener('touchstart', (e) => {
-        e.preventDefault();
-        element.classList.add('active');
-        state.touchControls[control] = true;
-    });
-    
-    element.addEventListener('mousedown', (e) => {
-        e.preventDefault();
-        element.classList.add('active');
-        state.touchControls[control] = true;
-    });
-}
-
-function handleTouchEnd(element, control) {
-    element.addEventListener('touchend', (e) => {
-        e.preventDefault();
-        element.classList.remove('active');
-        state.touchControls[control] = false;
-    });
-    
-    element.addEventListener('mouseup', (e) => {
-        e.preventDefault();
-        element.classList.remove('active');
-        state.touchControls[control] = false;
-    });
-    
-    element.addEventListener('mouseleave', (e) => {
-        element.classList.remove('active');
-        state.touchControls[control] = false;
-    });
-}
-
-handleTouchStart(leftBtn, 'left');
-handleTouchEnd(leftBtn, 'left');
-handleTouchStart(rightBtn, 'right');
-handleTouchEnd(rightBtn, 'right');
-handleTouchStart(fireBtn, 'fire');
-handleTouchEnd(fireBtn, 'fire');
 
 // Button Listeners
 document.getElementById('start-btn').addEventListener('click', startGame);
